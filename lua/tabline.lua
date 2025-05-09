@@ -67,7 +67,11 @@ end
 function M.create_component_highlight_group(color, highlight_tag)
   if color.bg and color.fg then
     local highlight_group_name = table.concat({ "tabline", highlight_tag }, "_")
-    M.highlight(highlight_group_name, color.fg, color.bg, color.gui)
+    local gui = "nocombine"
+    if color.gui then
+        gui = color.gui .. ",nocombine"
+    end
+    M.highlight(highlight_group_name, color.fg, color.bg, gui)
     return highlight_group_name
   end
 end
